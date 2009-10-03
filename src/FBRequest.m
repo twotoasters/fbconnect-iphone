@@ -104,10 +104,10 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
 
   NSArray* keys = [_params.allKeys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
   for (id obj in [keys objectEnumerator]) {
-    [joined appendString:obj];
-    [joined appendString:@"="];
     id value = [_params valueForKey:obj];
     if ([value isKindOfClass:[NSString class]]) {
+      [joined appendString:obj];
+      [joined appendString:@"="];
       [joined appendString:value];
     }
   }

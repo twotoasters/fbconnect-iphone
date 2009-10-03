@@ -69,7 +69,7 @@ static FBSession* sharedSession = nil;
 - (void)save {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if (_uid) {
-    [defaults setInteger:_uid forKey:@"FBUserId"];
+    [defaults setObject:[NSNumber numberWithLongLong:_uid] forKey:@"FBUserId"];
   } else {
     [defaults removeObjectForKey:@"FBUserId"];
   }
@@ -226,7 +226,7 @@ static FBSession* sharedSession = nil;
 
 - (BOOL)resume {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  FBUID uid = [defaults integerForKey:@"FBUserId"];
+  FBUID uid = [[defaults objectForKey:@"FBUserId"] longLongValue];
   if (uid) {
     NSDate* expirationDate = [defaults objectForKey:@"FBSessionExpires"];
     if (!expirationDate || [expirationDate timeIntervalSinceNow] > 0) {
